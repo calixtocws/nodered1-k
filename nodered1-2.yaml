@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nodered-1-efs-pvc
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: efs-sc
+  csi:
+    driver: efs.csi.aws.com
+    volumeHandle: fs-0f766b8e9cb7d38ac::fsap-09b19aa562533dfa0
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nodered-1-efs-pvc
+  labels:
+    app: nodered1
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: efs-sc
+  resources:
+    requests:
+      storage: 1Gi

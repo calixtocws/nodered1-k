@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: nodered1
+  name: nodered1
+  namespace: default
+spec:
+  ports:
+    - name: "1880"
+      port: 1880
+      protocol: TCP
+      targetPort: 1880
+  selector:
+    app: nodered1
+  sessionAffinity: None
+  type: ClusterIP

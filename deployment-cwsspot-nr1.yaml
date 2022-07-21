@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nodered1
+  name: nodered1
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nodered1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: nodered1
+    spec:
+      containers:
+        - image: calixtocws/cwsspot-nr1
+          imagePullPolicy: Always
+          name: nodered1
+          ports:
+            - containerPort: 1880
+              name: node-red
+          resources: {}
+          volumeMounts:
+          - name: nodered1
+            mountPath: /data
+      volumes:
+        - name: nodered1
+          persistentVolumeClaim:
+            claimName: nodered-1-efs-pvc
