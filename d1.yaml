@@ -25,3 +25,5 @@ spec:
             - containerPort: 1880
               name: node-red
           resources: {}
+      nodeSelector:
+        alpha.eksctl.io/nodegroup-name: cws-group-private 
